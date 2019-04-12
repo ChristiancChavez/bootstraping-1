@@ -5,33 +5,35 @@ fetch('https://rickandmortyapi.com/api/character/')
     console.log(response);
     let mainCharacters = document.getElementById('mainCharacters');
     
-    // const characterCard = response.results.map(person => {
+    response.results.map(person => {
 
-    //     let character = document.createElement('div');
-    //     character.setAttribute('class', 'character');
+        let character = document.createElement('div');
+        character.classList.add('character');
 
-    //     let characterImage = document.createElement('img');
-    //     characterImage.setAttribute('class', 'character__image');
+        let characterImage = document.createElement('img');
+        characterImage.classList.add('character__image');
+        characterImage.src=`${person.image}`;
 
-    //     let characterName = document.createElement('span');
-    //     characterName.setAttribute('class', 'character__name');
+        let characterName = document.createElement('span');
+        characterName.classList.add('character__name');
+        characterName.innerHTML=`${person.name}`;
 
-    //     let characterSpecie = document.createElement('span');
-    //     characterSpecie.setAttribute('class', 'character__name');
+        let characterSpecie = document.createElement('span');
+        characterSpecie.classList.add('character__name');
+        characterSpecie.innerHTML= `${person.species}`;
 
-    //     let characterGender = document.createElement('span');
-    //     characterGender.setAttribute('class', 'character__name');
-        
-    //     characterImage.src=`${person.image}`;
-    //     characterName.innerHTML=`${person.name}`;
-    //     characterSpecie.innerHTML= `${person.species}`;
-    //     characterGender= innerHTML=`${person.gender}`;
-    //     character.appendChild(characterImage);
-    //     character.appendChild(characterName);
-    //     character.appendChild(characterSpecie);
-    //     character.appendChild(characterGender);
-    // })
-    mainCharacters.innerHTML = "characterCard";
+        let characterGender = document.createElement('span');
+        characterGender.classList.add('character__name');
+        characterGender.innerHTML=`${person.gender}`;
+
+        mainCharacters.appendChild(character);
+        character.appendChild(characterImage);
+        character.appendChild(characterName);
+        character.appendChild(characterSpecie); 
+        character.appendChild(characterGender);
+    })
+
+    
 
 })
-.catch(err => console.log(err.message))
+.catch(err => console.log(err.message));
