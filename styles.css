@@ -4,6 +4,8 @@ body {
   background-size: cover;
   padding: 0;
   margin: 0;
+  height: 100%;
+  background-position: center center;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif; }
 
 header {
@@ -12,14 +14,14 @@ header {
 nav {
   display: flex;
   justify-content: space-around;
-  font-size: 20px; }
+  font-size: 25px; }
 
 nav > span {
   color: #a82be2;
   transition: all 1s ease 0s;
   height: 100%;
   width: 50%;
-  padding: 0.6%;
+  padding: 1%;
   text-align: center; }
 
 nav > span:hover {
@@ -30,35 +32,32 @@ nav > span:hover {
 .mainCharacters {
   display: flex;
   justify-content: space-around;
-  flex-flow: row nowrap;
-  align-items: flex-end;
-  padding: 20% 3% 3% 3%; }
+  flex-flow: row wrap;
+  padding-top: 20%; }
 
 .character {
-  background: linear-gradient(to bottom, #136d97, #19b5c0, #e3e65d);
+  background: linear-gradient(to bottom, rgba(19, 109, 151, 0.9), rgba(25, 181, 192, 0.9), rgba(227, 230, 93, 0.9));
   border-radius: 4px;
-  padding: 1%;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   text-align: center;
-  width: 120px;
+  width: 100px;
   height: 140px;
   align-items: center;
   justify-content: space-around;
-  border: solid 1px #a82be2; }
+  border: solid 1px #a82be2;
+  margin-bottom: 15px; }
   .character__image {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    border-radius: 50px;
     border: solid 1px #a82be2; }
   .character__name {
     color: #a82be2;
-    font-size: 15px;
+    font-size: 12px;
     font-weight: bold;
     cursor: pointer; }
-    .character__name:hover {
-      color: #f0ed52;
-      cursor: pointer; }
 
 .containButton {
   display: flex;
