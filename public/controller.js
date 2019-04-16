@@ -10,9 +10,9 @@ window.onload = function () {
     path: '/characters',
     name: 'About'
   }, {
-    path: /^\/details\/(1[0-9])/g,
+    path: /^\/details\/([0-9])/g,
     name: 'Details',
-    params: true
+    callback: 'loadDetails'
   }], '/home');
   var currentRoute = myFirstRouter.resolvePath();
   console.log(currentRoute);
@@ -35,10 +35,6 @@ Router.prototype.resolvePath = function () {
       var m = r.path.exec(currentPath);
 
       if (m !== null) {
-        m.forEach(function (match, groupIndex) {
-          console.log("Found match, group ".concat(groupIndex, ": ").concat(match));
-        });
-
         if (typeof m[1] !== 'undefined') {
           params.push(m[1]);
         }
@@ -56,7 +52,7 @@ Router.prototype.resolvePath = function () {
   }
 
   if (typeof route.callback !== 'undefined') {
-    var paramsStr = '(' + JSON.stringify(params) + ')';
+    var paramsStr = '(\'' + params.join('\',\')') + '\')';
 
     try {
       eval(route.callback + paramsStr);
@@ -102,6 +98,14 @@ function fetchData() {
   }).catch(function (err) {
     return console.error(err.message);
   });
+}
+
+function loadDetails() {
+  var characterId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+  if (characterId === null) {
+    alert('No character id');
+  }
 }
 
 function loadHome() {

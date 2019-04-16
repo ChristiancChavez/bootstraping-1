@@ -14,9 +14,9 @@ window.onload = function () {
             path: '/characters',
             name: 'About'
         }, {
-            path: /^\/details\/([1]\d)/gu,
+            path: /^\/details\/([0-9])/g,
             name: 'Details',
-            params: true
+            callback: 'loadDetails',
         }
     ], '/home');
 
@@ -42,9 +42,6 @@ Router.prototype.resolvePath = function () {
         } else if(typeof r.path !== 'undefiend') {
             let m = r.path.exec(currentPath);
             if(m !== null) {
-                m.forEach((match, groupIndex) => {
-                    console.log(`Found match, group ${groupIndex}: ${match}`);
-                });
                 if(typeof m[1] !== 'undefined') {
                     params.push(m[1]);
                 }
@@ -59,7 +56,7 @@ Router.prototype.resolvePath = function () {
         return;
     }
     if (typeof route.callback !== 'undefined') {
-        var paramsStr = '(' + JSON.stringify(params) + ')';
+        var paramsStr = '(\'' + params.join('\',\')') + '\')';
         try {
             eval(route.callback + paramsStr);
         } catch (error) {
@@ -111,6 +108,11 @@ function fetchData(route = '') {
 }
 
 
+function loadDetails(characterId = null) {
+    if(characterId === null) {
+        alert('No character id');
+    }
+}
 
 function loadHome() {
     var appDiv = document.getElementById('app');
