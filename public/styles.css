@@ -1,0 +1,174 @@
+body {
+  background: #ECEFF1;
+  color: rgba(0, 0, 0, 0.87);
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0; }
+
+#message {
+  background: white;
+  max-width: 360px;
+  margin: 100px auto 16px;
+  padding: 32px 24px;
+  border-radius: 3px; }
+
+#message h2 {
+  color: #ffa100;
+  font-weight: bold;
+  font-size: 16px;
+  margin: 0 0 8px; }
+
+#message h1 {
+  font-size: 22px;
+  font-weight: 300;
+  color: rgba(0, 0, 0, 0.6);
+  margin: 0 0 16px; }
+
+#message p {
+  line-height: 140%;
+  margin: 16px 0 24px;
+  font-size: 14px; }
+
+#message a {
+  display: block;
+  text-align: center;
+  background: #039be5;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: white;
+  padding: 16px;
+  border-radius: 4px; }
+
+#message,
+#message a {
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
+
+#load {
+  color: rgba(0, 0, 0, 0.4);
+  text-align: center;
+  font-size: 13px; }
+
+body {
+  background-image: url("./images/rick-morty.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 0;
+  margin: 0;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; }
+
+header {
+  background: lightgray; }
+
+nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  font-size: 20px; }
+
+nav > span {
+  color: #a82be2;
+  -webkit-transition: all 1s ease 0s;
+  transition: all 1s ease 0s;
+  height: 100%;
+  width: 50%;
+  padding: 0.6%;
+  text-align: center; }
+
+nav > span:hover {
+  color: #f0ed52;
+  cursor: pointer;
+  background: #a82be2; }
+
+#mainCharacters {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  padding: 20% 3% 3% 3%; }
+  #mainCharacters .character {
+    background: -webkit-gradient(linear, left top, left bottom, from(#136d97), color-stop(#19b5c0), to(#e3e65d));
+    background: linear-gradient(to bottom, #136d97, #19b5c0, #e3e65d);
+    border-radius: 4px;
+    padding: 1%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    text-align: center;
+    width: 120px;
+    height: 140px;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    border: solid 1px #a82be2;
+    color: red;
+    font-size: 20px; }
+    #mainCharacters .character__image {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: solid 1px #a82be2; }
+    #mainCharacters .character__name {
+      color: #a82be2;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer; }
+      #mainCharacters .character__name:hover {
+        color: #f0ed52;
+        cursor: pointer; }
+
+.containButton {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  padding-right: 3.8%; }
+
+.button {
+  padding: 1%;
+  color: #a82be2;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  background: lightgray;
+  -webkit-transition: all 1s ease 0s;
+  transition: all 1s ease 0s;
+  border: 1px solid #a82be2;
+  border-radius: 4px;
+  margin: 4%;
+  width: 15%; }
+  .button:hover {
+    color: #f0ed52;
+    background: #a82be2; }
+
+.hola {
+  background: red;
+  color: white; }
+
+@media (max-width: 600px) {
+  body,
+  #message {
+    margin-top: 0;
+    background: white;
+    -webkit-box-shadow: none;
+            box-shadow: none; }
+  body {
+    border-top: 16px solid #ffa100; } }

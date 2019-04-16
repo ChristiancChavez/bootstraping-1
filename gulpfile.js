@@ -5,7 +5,7 @@ var
     newer = require('gulp-newer'),
     imagemin = require('gulp-imagemin'),
     htmlclean = require('gulp-htmlclean'),
-    babel = require('gulp-babel')
+    babel = require('gulp-babel'),
     concat = require('gulp-concat'),
     deporder = require('gulp-deporder'),
     stripdebug = require('gulp-strip-debug'),
@@ -16,17 +16,16 @@ var
     autoprefixer = require('autoprefixer'),
     mqpacker = require('css-mqpacker'),
     cssnano = require('cssnano'),
-    browserSync = require('browser-sync').create()
-    reload = browserSync.reload
+    browserSync = require('browser-sync').create(),
 
 
-// development mode?
-devBuild = (process.env.NODE_ENV !== 'production'),
+    // development mode?
+    devBuild = (process.env.NODE_ENV !== 'production'),
 
     // folders
     folder = {
         src: 'src/',
-        build: 'build/'
+        build: 'public/'
     }
     ;
 
@@ -56,11 +55,11 @@ gulp.task('js', function () {
         .pipe(babel({
             presets: [
                 ['@babel/preset-env',
-                {
-                    "targets": {
-                        "ie": "11"
-                    }
-                }]
+                    {
+                        "targets": {
+                            "ie": "11"
+                        }
+                    }]
             ],
         }))
         .pipe(gulp.dest(folder.build));
@@ -109,24 +108,22 @@ gulp.task('html', function () {
 // watch for changes
 gulp.task('watch', function () {
     browserSync.init({
-        server: {
-            baseDir: "./build/"
-        }
+        proxy: "localhost:5000"
     });
     // javascript changes
-    gulp.watch(folder.src + 'js/**/*', gulp.parallel('js', reload));
+    gulp.watch(folder.src + 'js/**/*', gulp.series('js'));
     // css changes
-    gulp.watch(folder.src + 'sass/**/*', gulp.parallel('css', reload));
+    gulp.watch(folder.src + 'sass/**/*', gulp.series('css'));
     // image changes
-    gulp.watch(folder.src + 'images/**/*', gulp.parallel('images'));
+    gulp.watch(folder.src + 'images/**/*', gulp.series('images'));
     // html changes
-    gulp.watch(folder.src + '**/*.html', gulp.series('html', reload));
+    gulp.watch(folder.src + '**/*.html', gulp.series('html'));
+    // reload
+    gulp.watch("public/**/*").on('change', browserSync.reload);
 });
 
 
-
 gulp.task('run', gulp.parallel('html', 'css', 'js'));
-
 
 // default task
 gulp.task('default', gulp.series('run', 'watch'));

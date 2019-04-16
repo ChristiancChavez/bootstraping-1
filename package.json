@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Reto 1. Aplicación de Rick y Morty.",
   "dependencies": {
+    "express": "^4.16.4",
     "merge-stream": "^1.0.1",
+    "morgan": "^1.9.1",
     "node-sass-chokidar": "^1.3.4"
   },
   "devDependencies": {
@@ -23,13 +25,16 @@
     "gulp-newer": "^1.4.0",
     "gulp-postcss": "^8.0.0",
     "gulp-sass": "^4.0.2",
+    "gulp-shell": "^0.7.0",
     "gulp-strip-debug": "^3.0.0",
     "gulp-uglify": "^3.0.2",
     "gulp-watch": "^5.0.1",
     "postcss-assets": "^5.0.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "gulp run",
+    "start": "firebase serve </dev/null &>/dev/null & gulp"
   },
   "repository": {
     "type": "git",
