@@ -10,7 +10,7 @@ window.onload = function () {
     path: '/characters',
     name: 'About'
   }, {
-    path: /^\/details\/([0-9])/g,
+    path: /^\/details\/([^&]+)/g,
     name: 'Details',
     callback: 'loadDetails'
   }], '/home');
