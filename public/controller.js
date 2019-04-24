@@ -10,6 +10,10 @@ window.onload = function () {
     name: 'Characters',
     callback: 'charactersPage'
   }, {
+    path: /^\/characters\/([^&]+)/g,
+    name: 'Characters',
+    callback: 'charactersPage'
+  }, {
     path: /^\/details\/([^&]+)/g,
     name: 'Details',
     callback: 'detailsPage'
@@ -78,8 +82,12 @@ Router.prototype.homePage = function () {
 };
 
 Router.prototype.charactersPage = function () {
+  var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [1];
+  var page = params[0];
   var appDiv = document.getElementById('app');
-  fetchData('character').then(function (response) {
+  fetchData("character?page=".concat(page)).then(function (response) {
+    // Pagination.
+    console.log(response.info);
     var mainCharacters = document.createElement('div');
     mainCharacters.id = 'mainCharacters';
     mainCharacters.classList.add('mainCharacters');
