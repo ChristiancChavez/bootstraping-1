@@ -1,36 +1,28 @@
 
 window.onload = function () {
-    console.log('DOM has loaded');
-
-
-
-
     var myFirstRouter = new Router('myFirstRouter', [
         {
             path: '/home',
             name: 'Root',
-            callback: 'loadHome'
+            callback: 'homePage'
         }, {
             path: '/characters',
-            name: 'About'
+            name: 'Characters',
+            callback: 'charactersPage'
         }, {
             path: /^\/details\/([^&]+)/g,
             name: 'Details',
-            callback: 'loadDetails',
+            callback: 'detailsPage',
         }
     ], '/home');
 
-
     var currentRoute = myFirstRouter.resolvePath();
-
-    console.log(currentRoute);
-
 }
 
 var Router = function (name, routes, defaultRoute = '/') {
-    this.name = name; 
-    this.routes = routes; 
-    this.defaultRoute = defaultRoute
+    this.name = name;
+    this.routes = routes;
+    this.defaultRoute = defaultRoute;
 }
 
 Router.prototype.resolvePath = function () {
@@ -56,9 +48,8 @@ Router.prototype.resolvePath = function () {
         return;
     }
     if (typeof route.callback !== 'undefined') {
-        var paramsStr = '(\'' + params.join('\',\')') + '\')';
         try {
-            eval(route.callback + paramsStr);
+            this[route.callback](params);
         } catch (error) {
             alert('Function doesn\'t exists');
         }
@@ -66,12 +57,55 @@ Router.prototype.resolvePath = function () {
         alert('Callback function undefined.');
     }
     return route;
+}
 
+Router.prototype.homePage = function() {
+    var appDiv = document.getElementById('app');
+    fetchData('character/1,2,3')
+        .then(response => {
+            let mainCharacters = document.createElement('div');
+            mainCharacters.id = 'mainCharacters';
+            mainCharacters.classList.add('mainCharacters');
+
+            response.map(person => {
+                mainCharacters.appendChild(renderCharacterCard(person));
+            });
+            appDiv.innerHTML = '';
+            appDiv.appendChild(mainCharacters);
+        })
+}
+Router.prototype.charactersPage = function() {
+    var appDiv = document.getElementById('app');
+    fetchData('character')
+        .then(response => {
+            let mainCharacters = document.createElement('div');
+            mainCharacters.id = 'mainCharacters';
+            mainCharacters.classList.add('mainCharacters');
+
+            response.results.map(person => {
+                mainCharacters.appendChild(renderCharacterCard(person));
+            });
+            appDiv.innerHTML = '';
+            appDiv.appendChild(mainCharacters);
+        })
+}
+Router.prototype.detailsPage = function(params) {
+    let id = params[0];
+    var appDiv = document.getElementById('app');
+    fetchData('character/' + id)
+        .then(response => {
+            // handle details page.
+        })
 }
 
 function renderCharacterCard(person) {
     var characterDiv = document.createElement('div');
     characterDiv.classList.add('character');
+
+    
+    let characterLink = document.createElement('a');
+    characterLink.classList.add('character__link');
+    characterLink.href = `/details/${person.id}`;
 
     let characterImage = document.createElement('img');
     characterImage.classList.add('character__image');
@@ -89,10 +123,11 @@ function renderCharacterCard(person) {
     characterGender.classList.add('character__name');
     characterGender.innerHTML = `${person.gender}`;
 
-    characterDiv.appendChild(characterImage);
-    characterDiv.appendChild(characterName);
-    characterDiv.appendChild(characterSpecie);
-    characterDiv.appendChild(characterGender);
+    characterLink.appendChild(characterImage);
+    characterLink.appendChild(characterName);
+    characterLink.appendChild(characterSpecie);
+    characterLink.appendChild(characterGender);
+    characterDiv.appendChild(characterLink);
     return characterDiv;
 }
 
@@ -107,25 +142,3 @@ function fetchData(route = '') {
         .catch(err => console.error(err.message));
 }
 
-
-function loadDetails(characterId = null) {
-    if(characterId === null) {
-        alert('No character id');
-    }
-}
-
-function loadHome() {
-    var appDiv = document.getElementById('app');
-    fetchData('/character/1,2,3')
-        .then(response => {
-            let mainCharacters = document.createElement('div');
-            mainCharacters.id = 'mainCharacters';
-            mainCharacters.classList.add('mainCharacters');
-
-            response.map(person => {
-                mainCharacters.appendChild(renderCharacterCard(person));
-            });
-            appDiv.innerHTML = '';
-            appDiv.appendChild(mainCharacters);
-        })
-}

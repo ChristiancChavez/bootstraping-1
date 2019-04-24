@@ -1,2 +1,4 @@
 node_modules
 .sass-cache
+.firebase
+firebase-debug.log
